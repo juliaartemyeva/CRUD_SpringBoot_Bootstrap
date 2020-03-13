@@ -25,11 +25,6 @@ public class UserLoginController {
                 httpServletResponse.sendRedirect("/user");
             }
         }
-        if (request.getParameterMap().containsKey("error")) {
-            model.setViewName("login");
-            model.addObject("status", "Wrong Email or Password");
-            return model;
-        }
         model.setViewName("login");
         return model;
     }
