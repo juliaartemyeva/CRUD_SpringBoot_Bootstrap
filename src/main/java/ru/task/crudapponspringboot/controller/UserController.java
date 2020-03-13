@@ -24,7 +24,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @GetMapping("/user")
     public ModelAndView getUserPage(Authentication authentication, ModelAndView model) {
         User user = userService.findUserByName(authentication.getName());
         model.addObject("user", user);
@@ -32,7 +32,7 @@ public class UserController {
         return model;
     }
 
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    @GetMapping("/admin")
     public ModelAndView allUsers(ModelAndView modelAndView) {
         List<User> allUser = userService.findAll();
         modelAndView.setViewName("admin-page");
@@ -47,7 +47,7 @@ public class UserController {
         modelAndView.setViewName("edit-page");
         return modelAndView;
     }
-    @RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
+    @GetMapping("/admin/edit")
     public ModelAndView editPage(@RequestParam("id") Long id, ModelAndView modelAndView) {
         User user = userService.findById(id);
         modelAndView.addObject("user", user);
@@ -55,7 +55,7 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/admin/update", method = RequestMethod.POST)
+    @PostMapping("/admin/update")
     public String updateUser(@ModelAttribute("user") User user, HttpServletRequest request) {
         Set<Role> roles = user.getRoles();
         String RoleUser = request.getParameter("user");
@@ -71,7 +71,7 @@ public class UserController {
         return "redirect:/admin";
     }
 
-    @RequestMapping(value = "/admin/delete", method = RequestMethod.GET)
+   @GetMapping("/admin/delete")
     public String deleteUser(@RequestParam("id") Long id) {
         userService.deleteById(id);
         return "redirect:/admin";

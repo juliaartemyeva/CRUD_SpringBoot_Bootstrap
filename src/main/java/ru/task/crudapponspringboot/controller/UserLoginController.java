@@ -15,7 +15,9 @@ import java.io.IOException;
 public class UserLoginController {
 
     @RequestMapping("/login")
-    public ModelAndView getLogin(Authentication authentication, HttpServletRequest request, ModelAndView model, HttpServletResponse httpServletResponse) throws IOException, ServletException {
+    public ModelAndView getLogin(Authentication authentication, HttpServletRequest request,
+                                 ModelAndView model, HttpServletResponse httpServletResponse)
+            throws IOException, ServletException {
         if (authentication != null) {
             if (authentication.getAuthorities().contains(Role.ADMIN)) {
                 httpServletResponse.sendRedirect("/admin");

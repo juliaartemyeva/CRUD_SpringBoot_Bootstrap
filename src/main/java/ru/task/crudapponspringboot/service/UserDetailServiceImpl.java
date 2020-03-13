@@ -12,7 +12,6 @@ import ru.task.crudapponspringboot.model.User;
 @Service
 @Transactional
 public class UserDetailServiceImpl implements UserDetailsService {
-
     private UserDao userDao;
 
     @Autowired
