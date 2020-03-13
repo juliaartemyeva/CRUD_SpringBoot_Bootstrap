@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns: th="http://www.thymeleaf.org" >
+<html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Authorization</title>
@@ -18,6 +18,14 @@
 <div class="container col-md-5">
     <div class="card">
         <div class="card-body">
+
+            <div th:if="${param.error}">
+
+                <div class="alert alert-danger col-xs-offset-1 col-xs-10">
+                    Invalid username and password.
+                </div>
+
+            </div>
             <form action="/login" method="post">
                 <caption>
                     <h2>
@@ -29,7 +37,7 @@
                     <label>User Login</label> <input type="text" class="form-control"
                                                      name="username" required="required"> </fieldset>
                 <fieldset class="form-group">
-                    <label>Password</label> <input type="password" class="form-control"
+                    <label>User Password</label> <input type="password" class="form-control"
                                                    name="password" required="required"></fieldset>
                 <button type="submit" class="btn btn-success">Login</button>
 
@@ -37,12 +45,5 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
 </body>
 </html>
