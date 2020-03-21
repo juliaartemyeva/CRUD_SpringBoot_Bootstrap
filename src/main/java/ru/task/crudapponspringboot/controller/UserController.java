@@ -12,6 +12,7 @@ import ru.task.crudapponspringboot.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -28,15 +29,17 @@ public class UserController {
     public ModelAndView getUserPage(Authentication authentication, ModelAndView model) {
         User user = userService.findUserByName(authentication.getName());
         model.addObject("user", user);
-        model.setViewName("user-page");
+        model.setViewName("user-seite");
         return model;
     }
 
     @GetMapping("/admin")
     public ModelAndView allUsers(ModelAndView modelAndView) {
         List<User> allUser = userService.findAll();
-        modelAndView.setViewName("admin-page");
+        modelAndView.setViewName("admin-seite");
         modelAndView.addObject("listUser", allUser);
+        User user = new User();
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
 
@@ -44,14 +47,22 @@ public class UserController {
     public ModelAndView addUser(ModelAndView modelAndView) {
         User user = new User();
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("edit-page");
+        modelAndView.setViewName("/simplebootstrap/edit-page");
         return modelAndView;
     }
+
+    @RequestMapping("/admin/getOne")
+    @ResponseBody
+    public Optional<User> getOne(Long id) {
+        User user = userService.findById(id);
+        return Optional.ofNullable(user);
+    }
+
     @GetMapping("/admin/edit")
     public ModelAndView editPage(@RequestParam("id") Long id, ModelAndView modelAndView) {
         User user = userService.findById(id);
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("edit-page");
+        modelAndView.setViewName("/simplebootstrap/edit-page");
         return modelAndView;
     }
 

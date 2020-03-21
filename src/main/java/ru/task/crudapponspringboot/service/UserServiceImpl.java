@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void saveOrUpdate(User user) {
         userDao.saveOrUpdate(user);
-
     }
 
     @Override

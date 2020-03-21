@@ -25,7 +25,7 @@ public class UserLoginController {
                 httpServletResponse.sendRedirect("/user");
             }
         }
-        model.setViewName("login");
+        model.setViewName("login-seite");
         return model;
     }
 }

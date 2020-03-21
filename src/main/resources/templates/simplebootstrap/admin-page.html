@@ -2,7 +2,7 @@
 <html lang="en" xmlns: th="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>Admin Page</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -29,7 +29,7 @@
         <hr>
         <div class="container text-left">
 
-            <a href="/admin/new"class="btn btn-success">Add New User</a>
+            <a href="/admin/new" class="btn btn-success">Add New User</a>
         </div>
         <br>
 
@@ -45,21 +45,30 @@
             </tr>
             </thead>
             <tbody>
-                <tr th:each = "user : ${listUser}">
-                    <td th:text ="${user.username}"></td>
-                    <td th:text ="${user.password}"></td>
-                    <td th:text = "${user.firstName}"></td>
-                    <td th:text = "${user.lastName}"></td>
-                    <td><p th:each="role : ${user.getRoles()}" th:text="${role.getAuthority()}"></p></br></td>
-                    <td><a th:href="@{/admin/edit(id=${user.id})}"
-                           class="btn btn-info btn-sm">Edit</a>
-                        <a th:href="@{/admin/delete(id=${user.id})}"
-                           class="btn btn-danger btn-sm"
-                           onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false">Delete</a>
-                </tr>
+            <tr th:each="user : ${listUser}">
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.password}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td>
+                    <p>
+                        <th:block th:each="authority,
+                     iterStat : ${user.roles}">
+                            <th:block th:text="${authority.getAuthority() + (iterStat.last?'':',')}">
+                            </th:block>
+                        </th:block>
+                    </p>
+                </td>
+                <td><a th:href="@{/admin/edit(id=${user.id})}"
+                       class="btn btn-info btn-sm">Edit</a>
+                    <a th:href="@{/admin/delete(id=${user.id})}"
+                       class="btn btn-danger btn-sm"
+                       onclick="if (!(confirm('Are you sure you want to delete this user?'))) return false">Delete</a>
+            </tr>
             </tbody>
         </table>
     </div>
 </div>
+
 </body>
 </html>
