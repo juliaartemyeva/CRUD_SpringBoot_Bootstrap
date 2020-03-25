@@ -1,3 +1,4 @@
+/*
 $('document').ready(function () {
     $('.table .btn-info').on('click', function (event) {
         event.preventDefault();
@@ -24,4 +25,14 @@ $('document').ready(function () {
         $('#deleteModal').modal();
     });
 });
+*/
+/*
+$(document).ready(function(){
 
+$('.table .delBtn').on('click', function(event) {
+    event.preventDefault();
+    var href = $(this).attr('href');
+    $('#removeModalCenter #delRef').attr('href', href);
+    $('#removeModalCenter').modal();
+});
+});*/

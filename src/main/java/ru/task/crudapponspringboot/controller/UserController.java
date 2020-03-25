@@ -51,13 +51,6 @@ public class UserController {
         return modelAndView;
     }
 
-    @RequestMapping("/admin/getOne")
-    @ResponseBody
-    public Optional<User> getOne(Long id) {
-        User user = userService.findById(id);
-        return Optional.ofNullable(user);
-    }
-
     @GetMapping("/admin/edit")
     public ModelAndView editPage(@RequestParam("id") Long id, ModelAndView modelAndView) {
         User user = userService.findById(id);
